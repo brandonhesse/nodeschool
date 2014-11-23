@@ -23,7 +23,5 @@ module.exports = function(orders) {
     });
 
     return _.sortBy(reduced, 'total_orders').reverse();
-
-
 };
 
