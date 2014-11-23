@@ -1,16 +1,6 @@
-var through = require('through');
+var concat = require('concat-stream');
 
-var transform = through(write, end);
-var data = '';
+process.stdin.pipe(concat(function (body) {
+    console.log( body.toString().split('').reverse().join('') );
+}));
 
-function write(buf) {
-  console.log(buf.toString());
-  data += buf.toString();
-}
-
-function end() {
-  this.queue(data.reverse());
-  this.queue(null);
-}
-
-process.stdin.pipe(transform).pipe(process.stdout);
